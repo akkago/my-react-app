@@ -4,6 +4,17 @@ import { reportStore, GROUP_FIELDS } from "./store/ReportStore";
 import type { GroupField } from "./store/ReportStore";
 import { Box, Typography, Autocomplete, TextField, Chip, Button, Stack } from "@mui/material";
 
+// Русские названия полей
+const FIELD_LABELS: Record<GroupField, string> = {
+  warehouse: "Склад",
+  client: "Клиент", 
+  good: "Товар",
+  zone: "Зона",
+  batch: "Партия",
+  package: "Упаковка",
+  cargo: "Груз"
+};
+
 // Получить уникальные значения для фильтрации по полю (только id)
 function getOptions(field: GroupField): string[] {
   const data = reportStore.data;
@@ -76,7 +87,7 @@ export const ReportSettings: React.FC = observer(() => {
               options={getOptions(field)}
               value={filters[field] || []}
               onChange={(_, vals) => setFilter(field, vals)}
-              renderInput={params => <TextField {...params} label={field} margin="dense" />}
+              renderInput={params => <TextField {...params} label={FIELD_LABELS[field]} margin="dense" />}
               style={{ marginBottom: 8 }}
               renderOption={(props, option) => (
                 <li {...props}>{getLabel(field, option)}</li>
@@ -96,7 +107,7 @@ export const ReportSettings: React.FC = observer(() => {
             {groupBy.map((field, idx) => (
               <Chip
                 key={field}
-                label={field}
+                label={FIELD_LABELS[field]}
                 color="primary"
                 onDelete={() => removeGroup(idx)}
                 deleteIcon={<span>×</span>}
@@ -109,7 +120,7 @@ export const ReportSettings: React.FC = observer(() => {
           </Stack>
           <Box mt={1}>
             {GROUP_FIELDS.filter(f => !groupBy.includes(f)).map(f => (
-              <Button key={f} size="small" variant="outlined" onClick={() => addGroup(f)} style={{ marginRight: 4, marginBottom: 4 }}>{f}</Button>
+              <Button key={f} size="small" variant="outlined" onClick={() => addGroup(f)} style={{ marginRight: 4, marginBottom: 4 }}>{FIELD_LABELS[f]}</Button>
             ))}
           </Box>
           <Typography variant="caption" color="text.secondary">
