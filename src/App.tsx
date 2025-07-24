@@ -7,12 +7,16 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { IconButton, Dialog, DialogTitle, DialogContent, DialogActions, Drawer } from '@mui/material';
 import { translations } from './localization';
 import type { Lang } from './localization';
+import BookCarousel from './BookCarousel';
+import book1 from './assets/book1.jpg';
+import book2 from './assets/book2.jpg';
+import book3 from './assets/book3.jpg';
 
 const BOOKS = [
-  { id: 'b1', title: 'Мастер и Маргарита', author: 'Михаил Булгаков', price: 500 },
-  { id: 'b2', title: 'Преступление и наказание', author: 'Фёдор Достоевский', price: 450 },
-  { id: 'b3', title: 'Война и мир', author: 'Лев Толстой', price: 700 },
-  { id: 'b4', title: '1984', author: 'Джордж Оруэлл', price: 400 },
+  { id: 'b1', title: 'Мастер и Маргарита', author: 'Михаил Булгаков', price: 500, img: book1 },
+  { id: 'b2', title: 'Преступление и наказание', author: 'Фёдор Достоевский', price: 450, img: book2 },
+  { id: 'b3', title: 'Война и мир', author: 'Лев Толстой', price: 700, img: book3 },
+  { id: 'b4', title: '1984', author: 'Джордж Оруэлл', price: 400 }, // без картинки
 ];
 
 type Book = { id: string; title: string; author: string; price: number };
@@ -116,6 +120,10 @@ function MainReport({ lang }: { lang: Lang }) {
   const t = translations[lang];
   return (
     <>
+      {/* Карусель книг на главной странице */}
+      <Box py={2} px={2}>
+        <BookCarousel books={BOOKS} />
+      </Box>
       <Box py={2} px={2}>
         <Typography variant="h4" gutterBottom>{t.report}</Typography>
         {/* Настройки фильтров и группировки */}

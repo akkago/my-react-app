@@ -12,3 +12,11 @@ export type RemainRecord = {
   cargo: string | null;
   quantity: number;
 };
+
+// Тестовые картинки для BookCarousel
+export const TEST_BOOK_IMAGES = [
+  require('./book1.jpg'),
+  require('./book2.jpg'),
+  require('./book3.jpg'),
+  require('./book4.jpg'),
+];
